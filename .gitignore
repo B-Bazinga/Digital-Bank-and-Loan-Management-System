@@ -1,0 +1,41 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Root Node workspace
+node_modules/
+
+# Environment files (all scopes)
+.env
+.env.*
+!.env.example
+!backend/.env.example
+
+# Backend (Python)
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.coverage
+backend/*.log
+backend/.env
+backend/.env.*
+!backend/.env.example
+__pycache__/
+*.py[cod]
+
+# Frontend build/cache
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.log
+
+# Generic build artifacts
+dist/
+build/
+coverage/
+*.tmp

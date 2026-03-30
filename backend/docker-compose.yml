@@ -1,0 +1,36 @@
+services:
+  # The FastAPI Backend
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongo:27017
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_NAME=digital_banking
+    depends_on:
+      - mongo
+      - redis
+    # Mount your local code into the container so it updates live as you type
+    volumes:
+      - .:/app 
+    # Use standard FastAPI hot-reloading for development
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # The MongoDB Database
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # The Redis Cache
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+# Named volume to persist database data even if you destroy the containers
+volumes:
+  mongo_data:

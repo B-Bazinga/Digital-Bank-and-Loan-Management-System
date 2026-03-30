@@ -1,0 +1,18 @@
+{
+  "name": "digital-bank-and-loan-management-system",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Workspace runner for backend and frontend",
+  "scripts": {
+    "start": "npm run start:infra && concurrently -k -n BACKEND,FRONTEND -c blue,green \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:infra": "node scripts/start-infra.mjs",
+    "stop:infra": "docker compose -f backend/docker-compose.yml stop mongo redis",
+    "prepare:backend-env": "node scripts/prepare-backend-env.mjs",
+    "seed": "npm run prepare:backend-env && cd backend && .\\.venv\\Scripts\\python.exe -m app.scripts.seed_data",
+    "start:backend": "npm run prepare:backend-env && cd backend && .\\.venv\\Scripts\\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8001",
+    "start:frontend": "npm --prefix frontend run dev -- --host"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

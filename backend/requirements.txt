@@ -1,0 +1,10 @@
+fastapi[standard]
+pydantic-settings
+motor
+redis 
+bcrypt
+pyjwt
+python-dotenv
+pytest
+httpx
+slowapi
